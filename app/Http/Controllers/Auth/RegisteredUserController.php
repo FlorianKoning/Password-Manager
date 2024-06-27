@@ -38,8 +38,7 @@ class RegisteredUserController extends Controller
         ]);
 
 
-        // Creates the new direcotry with json file
-        $path = $this->createUserConfig($request->email, $request->password);
+        $path = $this->generateUserKey($request->email, $request->password);
 
 
         $user = User::create([
@@ -52,33 +51,44 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('dashboard.index', absolute: false));
     }
 
 
-    private function createUserConfig(string $email, string $password)
+
+    private function generateUserKey(string $email, string $master_password)
     {
-        // Hashed email, password and encryption key
-        $email = Hash::make($email);
-        $email = str_replace('\"', '', $email);
-        $email = str_replace('/', '', $email);
+        $folder_name = Hash::make($email);
+        $folder_name = preg_replace('/\\\\/', '', $folder_name);
+        $folder_name = str_replace('/', '', $folder_name);
 
-        $masterPassword = Hash::make($password);
-        $key = Functions::createKey();
+        $key = Functions::generateKey();
+        $key = str_replace('/', '', $key);
+        $key = preg_replace('/\\\\/', '', $key);
+
+        $master_password = Hash::make($master_password);
 
 
-        // Json file to put in user directory
-        $jsonFile = [
-            'master_password' => "$masterPassword",
-            'encryption_key' => "$key"
+        $json_file = [
+            'master_password' => $master_password,
+            'key' => $key,
         ];
 
-        
-        // Creates directory and ca
-        Storage::disk('users')->put($email.'/config.json', json_encode($jsonFile));
+
+        Storage::disk('users')->put($folder_name.'/config.json', json_encode($json_file));
 
 
-        // Returns the path
-        return str_replace('/config.json', '', str_replace('/storage/users/', '', Storage::url("users/$email/config.json")));
+        return $this->getPath($folder_name);
+    }
+
+
+    private function getPath(string $folder_name)
+    {
+        $path = Storage::url($folder_name.'/config.json');
+
+        $path = str_replace('/storage/', '', $path);
+        $path = str_replace('/config.json', '', $path);
+
+        return $path;
     }
 }

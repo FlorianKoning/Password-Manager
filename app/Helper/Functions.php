@@ -1,23 +1,22 @@
-<?php
-
+<?php 
 
 namespace App\Helper;
 
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
 class Functions {
-
-
-    /**
+     /**
      * Creates a random encryption key of 128 characters
      */
-    public static function createKey()
+    public static function generateKey()
     {
         $key = '';
 
-        for ($i=0; $i < 128 ; $i++) { 
+        for ($i=0; $i < 258 ; $i++) { 
             $key .= chr(random_int(33, 126));
         }
 
@@ -25,10 +24,34 @@ class Functions {
     }
 
 
-    public static function getMasterPassword(string $path)
+    /**
+     * Gets the key from user
+     */
+    public static function getKey()
     {
-        $jsonFile = json_decode(Storage::disk('users')->get("$path/config.json"), true);
+        $user = User::find(Auth::user()->id);
 
-        return $jsonFile['master_password'];
+        return json_decode(Storage::disk('users')->get($user->path.'/config.json'), true)['key'];
+    }
+
+    /**
+     * Gets the key from user
+     */
+    public static function getKeyById(int $id)
+    {
+        $user = User::find($id);
+
+        return json_decode(Storage::disk('users')->get($user->path.'/config.json'), true)['key'];
+    }
+
+
+    /**
+     * Returns the master password of user
+     */
+    public static function getMasterPassword(int $id)
+    {
+        $user = User::find($id);
+
+        return json_decode(Storage::disk('users')->get($user->path.'/config.json'), true)['master_password'];
     }
 }

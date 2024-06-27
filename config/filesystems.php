@@ -41,14 +41,6 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
-            'throw' => false,
-        ],
-
-        'users' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/users'),
-            'url' => env('APP_URL').'/storage/users',
-            'visibility' => 'public',
             'permissions' => [
                 'file' => [
                     'public' => 0644,
@@ -59,6 +51,14 @@ return [
                     'private' => 0700,
                 ],
             ],
+            'throw' => false,
+        ],
+
+        'users' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/users'),
+            'url' => env('APP_URL').'/storage/users',
+            'visibility' => 'public',
             'throw' => false,
         ],
 

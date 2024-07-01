@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\Functions;
-use Illuminate\Http\Request;
+use App\Models\Catagorie;
 
-class DashboardController extends Controller
+class DashboardController extends BaseController
 {
     public function index()
     {
         return view('dashboard', [
-            'key' => Functions::getKey()
+            'catagories' => $this->password_catagories
         ]);
     }
 }

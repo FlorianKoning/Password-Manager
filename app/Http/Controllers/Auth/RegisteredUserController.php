@@ -7,10 +7,12 @@ use App\Helper\Functions;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use App\Helper\AuthenticationKey;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Storage;
 
@@ -44,7 +46,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'path' => $path
+            'path' => Crypt::encryptString($path)
         ]);
 
         event(new Registered($user));
@@ -58,20 +60,18 @@ class RegisteredUserController extends Controller
 
     private function generateUserKey(string $email, string $master_password)
     {
-        $folder_name = Hash::make($email);
-        $folder_name = preg_replace('/\\\\/', '', $folder_name);
-        $folder_name = str_replace('/', '', $folder_name);
+        $folder_name = Crypt::encryptString($email);
 
-        $key = Functions::generateKey();
-        $key = str_replace('/', '', $key);
-        $key = preg_replace('/\\\\/', '', $key);
+        $key = AuthenticationKey::generateKey();
+        $key = stripslashes($key);
+        $key = preg_replace('/[\x00-\x09\x0B\x0C\x0E-\x1F\x7F]/', '', $key);
 
         $master_password = Hash::make($master_password);
 
 
         $json_file = [
             'master_password' => $master_password,
-            'key' => $key,
+            'key' => Crypt::encryptString($key),
         ];
 
 

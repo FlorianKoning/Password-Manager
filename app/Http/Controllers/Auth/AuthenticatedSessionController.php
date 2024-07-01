@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Session;
 use App\Models\User;
 use App\Helper\Functions;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Helper\AuthenticationKey;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
-use Session;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
@@ -26,6 +28,8 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * Displays the authentication key view
+     * @param Request $request
+     * @param User $user
      */
     public function key(Request $request, User $user)
     {
@@ -42,16 +46,22 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * Handle an incoming authentication request.
+     * @param LoginRequest $request
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Validates the login request data
         $validated = $request->validated();
 
     
+        // Gets user by email
         $user =  User::where('email', '=', $validated['email'])->first();
+
+        // Gets the master password by user id
         $master_password = Functions::getMasterPassword($user->id);
 
 
+        // Checks if the password is the same as the master password
         if(Hash::check($validated['password'], $master_password)) {
             $request->session()->put('credentials', true);
 
@@ -67,12 +77,12 @@ class AuthenticatedSessionController extends Controller
     public function login(Request $request, User $user)
     {
         $request->validate([
-            'key' => ['required', 'min:128', 'max:350'],
+            'key' => ['required', 'min:40', 'max:50'],
         ]);
 
-        $user_key = stripcslashes(Functions::getKeyById($user->id));
-
-        if($user_key === $request->key) {
+        $user_key = AuthenticationKey::getKeyById($user->id);
+        
+        if(Crypt::decrypt($user_key, false) === $request->key) {
             $request->session()->flush();
 
             Auth::loginUsingId($user->id);

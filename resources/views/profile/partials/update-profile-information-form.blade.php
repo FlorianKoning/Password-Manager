@@ -9,8 +9,43 @@
         </p>
     </header>
 
+    
+
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
+    </form>
+
+
+    {{-- Authentication key --}}
+    <form method="POST" action="{{ route('profile.reset') }}" class="mt-6">
+        @csrf
+        @method('post')
+
+        <div class="space-y-6">
+            <div class="flex">
+                <div>
+                    <input id="key" type="hidden" value="{{ Crypt::decrypt($key, false) }}">
+        
+                    <div class="flex gap-1 text-center">
+                        <div  class="text-base text-gray-900">
+                            {{ __("Authentication key: ") }}
+                        </div>
+                        <span class="text-main text-base font-bold">{{ mb_strimwidth(Crypt::decrypt($key, false), 0, 30, "...") }}</span>
+                    </div>
+                </div>
+        
+                <div class="ml-auto flex gap-2">
+                    <button type="button" id="button" onclick="copyFunction()" class="bg-second px-2 text-sm text-[#fff] rounded-lg hover:bg-main ease-out transition">
+                        Copy Key
+                    </button>
+                    
+        
+                    <button type="submit" id="button" onclick="copyFunction()" class="bg-second px-2 text-sm text-[#fff] rounded-lg hover:bg-main ease-out transition">
+                        Reset Key
+                    </button>
+                </div>
+            </div>
+        </div>
     </form>
 
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
@@ -19,13 +54,13 @@
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-text-input class="mt-1 block w-full text-main" id="name" name="name" type="text" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-text-input class="mt-1 block w-full text-main" id="email" name="email" type="email" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())

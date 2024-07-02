@@ -1,40 +1,22 @@
 // Display function for the dialog div
 function showDialog(dialog_id) {
-    // gets the id of the dialog div
-    const dialog = document.getElementById(dialog_id);
-
-
-    // Ease in animation for background
-    const keyframes = [
-        {opacity: 0},
-        {opacity: 100},
-    ];
-    const timing = {
-        duration: 300,
-        easing: "ease-out"
-    };
-
-    // Ease in animations for div
-    dialog.animate(keyframes, timing);
-
-    // sets the aria-modal to false
-    dialog.setAttribute('aria-modal', true);
-
-    // Shows the dialog divs
-    dialog.classList.remove("hidden");
+    $("#"+dialog_id)
+        .fadeIn()
+        .removeClass("hidden")
+        .attr({
+            'aria-modal': 'true',
+    });
 }
 
 
 // Close function for the dialog div
 function closeDialog(dialog_id) {
-    // gets the id of the dialog div
-    const dialog = document.getElementById(dialog_id);
-
-
-    // sets the aria-modal to false
-    dialog.setAttribute('aria-modal', false);
-    
-    dialog.classList.add("hidden");
+    $("#"+dialog_id)
+        .fadeOut()
+        .addClass("hidden")
+        .attr({
+            'aria-modal': 'false',
+    });
 }
 
 // Creates the new input fields
@@ -46,9 +28,7 @@ function createNewInput() {
     // Checks if the extra input title is empty
     if (title.value == '') {
         // Gives a input error
-        inputError.innerHTML = "Please fill in the title!";
-
-        inputError.classList.remove('hidden');
+        $("#inputError").html("Please fill in the title!").removeClass("hidden");
     } else {
         // Adds the new input and label with title as name and id
         let newDiv = document.createElement("div");

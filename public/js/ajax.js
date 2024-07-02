@@ -14,22 +14,10 @@ function generatePassword() {
     });
 
     // Ease in animation for background
-    let check = document.getElementById('checkId');
-
-    const keyframes = [
-        {opacity: 0},
-        {opacity: 100},
-    ];
-    const timing = {
-        duration: 900,
-        easing: "ease-out"
-    };
-
-    check.animate(keyframes, timing);
-    check.classList.remove("hidden");
+   $("#checkId").fadeIn().removeClass("hidden"); 
 }
 
-
+// Gets password form database by item_id and copy's password to clipboard
 function getPassword(item_id) {
     $.ajax({
         type: 'GET',
@@ -38,10 +26,19 @@ function getPassword(item_id) {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(data) {
+            showNotification();
+
             console.log(data.password);
             navigator.clipboard.writeText(data.password);
         }
     })
-  }
+}
+
+// Displays notification that password has been copyd
+function showNotification() {
+    $("#copyAlert").fadeIn().removeClass("hidden");
+    $("#copyAlert").delay(4000).fadeOut().addClass("hiddem");
+}
+
 
 

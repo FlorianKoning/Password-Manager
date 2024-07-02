@@ -18,7 +18,7 @@
                 <div class="max-w-full">
                     {{-- table --}}
                     <section>
-                        <x-dashboard-table :items="$items" />
+                        <x-items-table :items="$items" />
                     </section>
                 </div>
             </div>

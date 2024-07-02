@@ -1,7 +1,7 @@
 @props(['catagories', 'catagorie'])
 
 <div id="catagorie_dialog" class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="fixed inset-0 bg-background backdrop-blur-sm bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div id="dialogBackground" class="fixed inset-0 backdrop-blur-sm bg-background bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
       <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
       <form id="catagorie-form" method="POST" action="{{ route('items.store', $catagorie) }}">

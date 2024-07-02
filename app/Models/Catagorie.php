@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Catagorie extends Model
 {
@@ -16,5 +18,18 @@ class Catagorie extends Model
      */
     protected $fillable = [
         'title',
+        'user_id'
     ];
+
+    /**
+     * Tells laravel there are no timestamps columns
+     */
+    public $timestamps = false;
+
+
+
+    public static function categoriesCount()
+    {
+        return DB::table('catagories')->where('user_id', Auth::user()->id)->count();
+    }
 }

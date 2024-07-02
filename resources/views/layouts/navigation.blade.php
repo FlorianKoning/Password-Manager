@@ -1,3 +1,6 @@
+{{-- include javascript files --}}
+<script type="text/javascript" src="{{asset('js/dialog.js') }}"></script>
+    
     <!--
       Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
@@ -71,15 +74,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                       </svg>
-                      {{ __('Profile') }}
-                    </x-nav-link>
-                  </li>
-                  <li>
-                    <x-nav-link>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
-                      </svg>
-                      {{ __('All Items') }}
+                      {{ __('Dashboard') }}
                     </x-nav-link>
                   </li>
                   <li>
@@ -93,27 +88,23 @@
                 </ul>
               </li>
               <li>
-                <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+                <div class="flex text-xs font-semibold leading-6 text-gray-400 justify-between">
+                  <p>Categories</p>
+                  <button onclick="showDialog('create_catagorie')" title="Add catagorie" class="mt-1 hover:text-second ease-in-out transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                      <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm.75-10.25v2.5h2.5a.75.75 0 0 1 0 1.5h-2.5v2.5a.75.75 0 0 1-1.5 0v-2.5h-2.5a.75.75 0 0 1 0-1.5h2.5v-2.5a.75.75 0 0 1 1.5 0Z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
                 <ul role="list" class="-mx-2 mt-2 space-y-1">
-                  <li>
-                    <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-second hover:text-white transition">
-                      <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">H</span>
-                      <span class="truncate">Heroicons</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-second hover:text-white transition">
-                      <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">T</span>
-                      <span class="truncate">Tailwind Labs</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-second hover:text-white transition">
-                      <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">W</span>
-                      <span class="truncate">Workcation</span>
-                    </a>
-                  </li>
+                  @foreach ($catagories as $catagorie)
+                    <li>
+                      <x-categories-nav-link :href="route('catagorie.index', $catagorie['id'])" :active="request()->is('items/'. $catagorie['id'])">
+                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-second text-[0.625rem] font-medium text-white group-hover:text-white border ">{{ strtoupper($catagorie['title'][0])  }}</span>
+                        <span class="truncate">{{ $catagorie['title'] }}</span>
+                      </x-categories-nav-link>
+                    </li>
+                  @endforeach
                 </ul>
               </li>
               <li class="mt-auto">
@@ -158,14 +149,6 @@
                 </x-nav-link>
               </li>
               <li>
-                <x-nav-link :href="route('items.index')" :active="request()->routeIs('items.*')">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
-                  </svg>
-                  {{ __('All Items') }}
-                </x-nav-link>
-              </li>
-              <li>
                 <x-nav-link>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
@@ -176,7 +159,14 @@
             </ul>
           </li>
           <li>
-            <div class="text-xs font-semibold leading-6 text-gray-400">Categories</div>
+            <div class="flex text-xs font-semibold leading-6 text-gray-400 justify-between">
+              <p>Categories</p>
+              <button onclick="showDialog('create_catagorie')" title="Add catagorie" class="mt-1 hover:text-second ease-in-out transition">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm.75-10.25v2.5h2.5a.75.75 0 0 1 0 1.5h-2.5v2.5a.75.75 0 0 1-1.5 0v-2.5h-2.5a.75.75 0 0 1 0-1.5h2.5v-2.5a.75.75 0 0 1 1.5 0Z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
             <ul role="list" class="-mx-2 mt-2 space-y-1">
                 @foreach ($catagories as $catagorie)
                   <li>
@@ -201,3 +191,12 @@
       </nav>
     </div>
   </div>
+
+{{-- Add catagorie dialog --}}
+<x-add-catagorie-dialog />
+
+
+{{-- succes notification --}}
+@if (session('newCatagorie'))
+    <x-catagorieSucces />
+@endif

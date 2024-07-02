@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catagorie;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
@@ -12,7 +13,7 @@ class BaseController extends Controller
     protected $password_catagories;
     public function __construct()
     {
-        $this->password_catagories = Catagorie::all();
+        $this->password_catagories = Catagorie::all()->where('user_id', Auth::user()->id);
         View::share('password_catagories', $this->password_catagories);
     }
 }

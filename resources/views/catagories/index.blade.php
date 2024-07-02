@@ -1,5 +1,5 @@
 {{-- include javascript files --}}
-<script type="text/javascript" src="{{asset('js/notification.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/dialog.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/ajax.js') }}"></script>
 
 
@@ -14,15 +14,21 @@
             </div>
         </div>
     </div>
-
-    {{-- add item dialog --}}
-    <x-add-item-dialog :catagories="$catagories" :catagorie="$catagorie" />
-
-    {{-- error notification --}}
-    @if ($errors->all() != null)
-        <x-formError-notification :message="$errors->all()" />
-    @endif
 </x-app-layout>
+
+
+{{-- Add item dialog --}}
+<x-add-item-dialog :catagories="$catagories" :catagorie="$catagorie" />
+
+{{-- Error notification --}}
+@if ($errors->all() != null)
+    <x-formError :message="$errors->all()" />
+@endif
+
+{{-- Succes notification --}}
+@if (session('succesMessage'))
+    <x-formSucces />
+@endif
 
 
 

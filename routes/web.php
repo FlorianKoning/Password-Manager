@@ -31,12 +31,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-    // All wifi routes
+    // All catagorie routes
     Route::get('/items/{catagorie}', [CatagorieController::class, 'index'])->name('catagorie.index');
+    Route::post('/catagorie/add', [CatagorieController::class, 'store'])->name('catagorie.store');
 
 
     // Ajax routes
     Route::post('/ajax/password', [AjaxController::class, 'generate'])->name('ajax.generate');
+    Route::post('/ajax/chart', [AjaxController::class, 'chart'])->name('ajax.chart');
+    Route::get('/ajax/{item}', [AjaxController::class, 'getPassword'])->name('ajax.getPassword');
 });
 
 

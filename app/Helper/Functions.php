@@ -40,7 +40,7 @@ class Functions {
      */
     public static function generateExtraArray(array $array)
     {
-        $removeArray = ['_token', '_method', 'title', 'password'];
+        $removeArray = ['_token', 'catagorie_id', 'title', 'password', 'type'];
 
         foreach ($removeArray as $key )
         {
@@ -48,8 +48,6 @@ class Functions {
         }
 
         
-        return [
-            'extra' => $array,
-        ];
+        return $array;
     }
 }

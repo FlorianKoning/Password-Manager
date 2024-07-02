@@ -28,3 +28,20 @@ function generatePassword() {
     check.animate(keyframes, timing);
     check.classList.remove("hidden");
 }
+
+
+function getPassword(item_id) {
+    $.ajax({
+        type: 'GET',
+        url: "/ajax/"+item_id,
+        headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data) {
+            console.log(data.password);
+            navigator.clipboard.writeText(data.password);
+        }
+    })
+  }
+
+

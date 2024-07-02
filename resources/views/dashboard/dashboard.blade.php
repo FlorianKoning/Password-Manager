@@ -1,5 +1,7 @@
 {{-- include javascript files --}}
 <script type="text/javascript" src="{{asset('js/ajax.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/ajax.js') }}"></script>
+
 
 <x-app-layout :catagories="$catagories">
     <div class="py-2">
@@ -25,3 +27,5 @@
         </div>
     </div>
 </x-app-layout>
+
+

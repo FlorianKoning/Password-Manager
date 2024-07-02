@@ -41,4 +41,10 @@ function showNotification() {
 }
 
 
+// Shows the edit dialog and gets data from route
+function showEditDialog(dialog_id)
+{
+    $("#"+dialog_id).fadeIn().removeClass("hidden");
+}
+
 

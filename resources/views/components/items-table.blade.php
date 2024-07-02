@@ -54,7 +54,7 @@
                         </a>
                       </td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                        <a href="#" class="hover:text-second ease-in-out transition">
+                        <a onclick="showEditDialog('edit_dialog')" class="hover:text-second ease-in-out transition cursor-pointer">
                           {{ __('Edit') }}
                         </a>
                       </td>
@@ -75,3 +75,8 @@
 
 {{-- copy alert --}}
 <x-copy-alert />
+
+
+  
+{{-- Edit dialogs --}}
+<x-edit-item-dialog />

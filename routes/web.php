@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/ajax/password', [AjaxController::class, 'generate'])->name('ajax.generate');
     Route::post('/ajax/chart', [AjaxController::class, 'chart'])->name('ajax.chart');
     Route::get('/ajax/{item}', [AjaxController::class, 'getPassword'])->name('ajax.getPassword');
+    Route::get('ajax/edit', [AjaxController::class, 'edit'])->name('ajax.edit');
 });
 
 

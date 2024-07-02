@@ -19,6 +19,7 @@ function closeDialog(dialog_id) {
     });
 }
 
+
 // Creates the new input fields
 function createNewInput() {
     let container = document.getElementById('form-container');

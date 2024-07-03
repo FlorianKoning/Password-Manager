@@ -18,7 +18,8 @@ function closeDialog(dialog_id) {
             'aria-modal': 'false',
     });
 
-    $("#extra_div").delay(2000).remove();
+    $("#edit_password").prop('type', 'password')
+    $("#extra_div").remove();
 }
 
 

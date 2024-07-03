@@ -116,3 +116,13 @@ function displayExtraInputs(dialog_id,data)
 }
 
 
+
+function showPassword()
+{
+    if($("#edit_password").attr('type') == 'password') {
+        $("#edit_password").prop('type', 'text')
+    } else {
+        $("#edit_password").prop('type', 'password')
+    }
+}
+

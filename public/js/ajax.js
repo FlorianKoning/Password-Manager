@@ -18,6 +18,8 @@ function generatePassword() {
 }
 
 
+
+
 // Gets password form database by item_id and copy's password to clipboard
 function getPassword(item_id) {
     $.ajax({
@@ -36,11 +38,15 @@ function getPassword(item_id) {
 }
 
 
+
+
 // Displays notification that password has been copyd
 function showNotification() {
     $("#copyAlert").fadeIn().removeClass("hidden");
     $("#copyAlert").delay(4000).fadeOut().addClass("hiddem");
 }
+
+
 
 
 // Shows the edit dialog and gets data from route
@@ -60,6 +66,8 @@ function showEditDialog(dialog_id, item_id)
 }
 
 
+
+
 function displayExtraInputs(dialog_id,data) 
 {
     // Puts the title and password in the right input
@@ -77,9 +85,11 @@ function displayExtraInputs(dialog_id,data)
     div.setAttribute('id', 'extra_div');
     div.classList.add('space-y-6');
 
+    
     container.appendChild(div);
 
-    if(data.extra) {
+
+    if(data.extra != '[]') {
         // Loops true the extra array
         $.each(data.extra, function(key, value) {
             let newDiv = document.createElement("div");
@@ -100,9 +110,9 @@ function displayExtraInputs(dialog_id,data)
                 "mt-1 block w-full text-main placeholder-main border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
             ).appendTo(newDiv);
         })
-
-        $("#"+dialog_id).fadeIn().removeClass("hidden");
     }
+
+    $("#"+dialog_id).fadeIn().removeClass("hidden");
 }
 
 

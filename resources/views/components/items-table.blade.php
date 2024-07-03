@@ -72,6 +72,7 @@
       </div>
     </div>
 
+    
 {{-- copy alert --}}
 <x-copy-alert />
 

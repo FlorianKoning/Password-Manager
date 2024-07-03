@@ -17,13 +17,14 @@ function generatePassword() {
    $("#checkId").fadeIn().removeClass("hidden"); 
 }
 
+
 // Gets password form database by item_id and copy's password to clipboard
 function getPassword(item_id) {
     $.ajax({
         type: 'GET',
         url: "/ajax/"+item_id,
         headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(data) {
             showNotification();
@@ -34,6 +35,7 @@ function getPassword(item_id) {
     })
 }
 
+
 // Displays notification that password has been copyd
 function showNotification() {
     $("#copyAlert").fadeIn().removeClass("hidden");
@@ -42,9 +44,65 @@ function showNotification() {
 
 
 // Shows the edit dialog and gets data from route
-function showEditDialog(dialog_id)
+function showEditDialog(dialog_id, item_id)
 {
-    $("#"+dialog_id).fadeIn().removeClass("hidden");
+    $.ajax({
+        type: 'GET',
+        url: '/ajax/edit/'+item_id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data) {
+            // Function to fill in the inputs
+            displayExtraInputs(dialog_id,data);
+        }
+    })
+}
+
+
+function displayExtraInputs(dialog_id,data) 
+{
+    // Puts the title and password in the right input
+    $("#edit_title").val(data.title);
+    $("#edit_password").val(data.password);
+
+
+    // Makes the right option selected
+    $("#"+data.type).attr('selected', 'selected');
+
+    // Sets up the div for the label and input
+    let container = document.getElementById('edit-form-container');
+
+    let div = document.createElement("div");
+    div.setAttribute('id', 'extra_div');
+    div.classList.add('space-y-6');
+
+    container.appendChild(div);
+
+    if(data.extra) {
+        // Loops true the extra array
+        $.each(data.extra, function(key, value) {
+            let newDiv = document.createElement("div");
+            div.appendChild(newDiv);
+
+            // Creates the new label
+            $('<label>').html(key).attr({
+                for: key,
+            }).addClass("block font-medium text-sm text-gray-700").appendTo(newDiv);
+
+            // Creates the new form
+            $('<input>').attr({
+                type: 'text',
+                name: key,
+                id: key,
+                value: value,
+            }).addClass(
+                "mt-1 block w-full text-main placeholder-main border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+            ).appendTo(newDiv);
+        })
+
+        $("#"+dialog_id).fadeIn().removeClass("hidden");
+    }
 }
 
 

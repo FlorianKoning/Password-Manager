@@ -2,6 +2,7 @@
 
 namespace App\Helper;
 
+use stdClass;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
@@ -49,5 +50,22 @@ class Functions {
 
         
         return $array;
+    }
+
+
+    /**
+     * Decrypts the incoming extra array of items
+     * @param stdClass $extra_array
+     */
+    public static function decryptExtraArray(stdClass $extra_array)
+    {
+        $new_extra_array = [];
+
+        foreach ($extra_array as $key => $value)
+        {
+            $new_extra_array[$key] = Crypt::decrypt($value, false);
+        }
+
+        return $new_extra_array;
     }
 }

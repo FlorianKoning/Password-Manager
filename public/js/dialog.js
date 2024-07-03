@@ -17,6 +17,8 @@ function closeDialog(dialog_id) {
         .attr({
             'aria-modal': 'false',
     });
+
+    $("#extra_div").delay(2000).remove();
 }
 
 

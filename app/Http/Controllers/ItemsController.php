@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\AuthenticationKey;
 use App\Models\Item;
 use App\Helper\Functions;
 use App\Models\Catagorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Validation\Rules\Password;
 
 class ItemsController extends BaseController
 {
@@ -64,7 +63,9 @@ class ItemsController extends BaseController
     }
 
 
-    // Encrypt all the extra request data in a json file
+    /**
+     * ncrypt all the extra request data in a json file
+     */
     private function encryptJsonFile(array $extra_array)
     {
         $json_file = [];
@@ -76,7 +77,9 @@ class ItemsController extends BaseController
     }
 
 
-    // Validates all the request data
+    /**
+     * Validates all the request data
+     */
     private function validation(array $extra_array, $request)
     {   
         // Validates the default request data

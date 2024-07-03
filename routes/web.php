@@ -40,7 +40,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/ajax/password', [AjaxController::class, 'generate'])->name('ajax.generate');
     Route::post('/ajax/chart', [AjaxController::class, 'chart'])->name('ajax.chart');
     Route::get('/ajax/{item}', [AjaxController::class, 'getPassword'])->name('ajax.getPassword');
-    Route::get('ajax/edit', [AjaxController::class, 'edit'])->name('ajax.edit');
+    Route::get('/ajax/edit/{item}', [AjaxController::class, 'edit'])->name('ajax.edit');
+
+
+    // authentication key check
+    Route::post('/authenticate', [ItemsController::class, 'auth_check'])->name('auth_check');
 });
 
 

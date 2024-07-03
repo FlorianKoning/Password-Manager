@@ -44,7 +44,7 @@
                             </svg>
                           </button>
                         </div>
-                        <x-text-input class="mt-1 block w-full text-main placeholder-main" id="password" name="password" type="text" :value="old('password')" placeholder="Type here your password" required autofocus autocomplete="password" />
+                        <x-text-input class="mt-1 block w-full text-main placeholder-main" id="password" name="password" type="password" :value="old('password')" placeholder="Type here your password" required autofocus autocomplete="password" />
                         <x-input-error class="mt-2" :messages="$errors->get('password')" />
                     </div>
 

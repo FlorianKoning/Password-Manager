@@ -45,7 +45,10 @@ function createNewInput() {
         // Creates the new label
         $('<label>').html(title.value).attr({
             for: title.value,
-        }).addClass("block font-medium text-sm text-gray-700").appendTo(newDiv);
+        }).addClass(
+            "block font-medium text-sm text-gray-700"
+        ).appendTo(newDiv);
+
 
         // Creates the new form
         $('<input>').attr({

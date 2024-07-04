@@ -41,7 +41,7 @@
                           <x-input-label class="text-main" for="password" :value="__('Password for the item')" />
 
                           {{-- generate password --}}
-                          <button onclick="generatePassword()" type="button" class="flex gap-1 font-medium text-sm text-second hover:text-second/75 ease-in-out transition">
+                          <button onclick="generatePassword('edit_password')" type="button" class="flex gap-1 font-medium text-sm text-second hover:text-second/75 ease-in-out transition">
                             {{ __('Generate password') }}
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hidden size-6" id="edit_checkId">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -56,7 +56,7 @@
                             </svg>
                           </button>
                         </div>
-                        <x-text-input class="mt-1 block w-full text-main placeholder-main" id="edit_password" name="edit_password" type="password" :value="old('edit_password')" placeholder="Type here your password" required autofocus autocomplete="edit_password" />
+                        <x-text-input  class="mt-1 block w-full text-main placeholder-main" id="edit_password" name="edit_password" type="password" :value="old('edit_password')" placeholder="Type here your password" required autofocus autocomplete="password"/>
                         <x-input-error class="mt-2" :messages="$errors->get('password')" />
                     </div>
 

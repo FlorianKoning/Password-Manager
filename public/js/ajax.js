@@ -1,6 +1,6 @@
 // Generates a new password and prints it out in the input
 // Removes hidden class from element with animation
-function generatePassword() {
+function generatePassword(input_id) {
     $.ajax({
         type: 'POST',
         url: '/ajax/password',
@@ -8,7 +8,10 @@ function generatePassword() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success:function(data) {
-            $("#password").val(data.password);
+            console.log(data.password);
+
+            $("#"+input_id).val(data.password);
+
             $("svg").removeClass("hidden");
         }
     });

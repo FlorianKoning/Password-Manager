@@ -73,8 +73,14 @@
     </div>
 
 
+{{-- Succes notification --}}
+@if (session('succesMessage'))
+    <x-formSucces />
+@endif
+
+
 {{-- Error notification --}}
-@if ($errors->all() != null)
+@if ($errors->all() != null || session('errorMessage'))
   <x-formError :message="$errors->all()" />
 @endif
 

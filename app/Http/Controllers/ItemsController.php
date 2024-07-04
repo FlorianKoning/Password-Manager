@@ -2,17 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\AuthenticationKey;
 use App\Models\Item;
 use App\Helper\Functions;
 use App\Models\Catagorie;
 use Illuminate\Http\Request;
+use App\Helper\AuthenticationKey;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Validation\ValidationException;
 
 class ItemsController extends BaseController
 {
+    private $validation_map = [
+        'edit' => [
+            'edit_title' => 'required|string|max:100',
+            'edit_password' => 'required|string|max:50',
+        ],
+        'normal' => [
+            'title' => 'required|string|max:100',
+            'password' => 'required|string|max:50',
+        ]
+    ];
+
+
     /**
      * Stores the new item in de database
      */
@@ -23,7 +36,7 @@ class ItemsController extends BaseController
 
 
         // Validates the request data
-        $this->validation($extra_array, $request);
+        $this->validation($extra_array, $request, 'store');
 
 
         // Encrypt all the extra request data in a json file
@@ -50,7 +63,7 @@ class ItemsController extends BaseController
     {
         // Validates the request data
         $extra_array = Functions::generateExtraArray($request->all());
-        $this->validation($extra_array, $request);
+        $this->validation($extra_array, $request, 'edit');
 
         // Encrypt all the extra request data in a json file
         $json_file = $this->encryptJsonFile($extra_array);
@@ -84,41 +97,30 @@ class ItemsController extends BaseController
      */
     private function encryptJsonFile(array $extra_array)
     {
-        $json_file = [];
         foreach ($extra_array as $key => $value) {
-            $json_file[$key] =  Crypt::encryptString($value);
+            $extra_array[$key] =  Crypt::encryptString($value);
         }
 
-        return $json_file;
+        return $extra_array;
     }
 
 
     /**
      * Validates all the request data
      */
-    private function validation(array $extra_array = [], $request)
+    private function validation($extra_array, $request, $option)
     {   
         // Validates the default request data
-        if(isset($request->title)){
-            $request->validate([
-                'title' => ['required', 'string', 'max:100'],
-                'password' => ['required', 'string', 'max:50'],
-            ]);
-        } else {
-            $request->validate([
-                'edit_title' => ['required', 'string', 'max:100'],
-                'edit_password' => ['required', 'string', 'max:50'],
-            ]);
+        if(array_key_exists($option, $this->validation_map)) {
+            $request->validate($this->validation_map[$option]);
         }
         
-
         // Extra request data validation
-        $valid = [];
         foreach ($extra_array as $key => $value) {
-            $valid[$key] = "required";
+            $extra_array[$key] = "required";
         }
         
-        $request->validate($valid);
+        $request->validate($extra_array);
     }
 }
 

@@ -19,14 +19,3 @@
 
 {{-- Add item dialog --}}
 <x-add-item-dialog :catagories="$catagories" :catagorie="$catagorie" />
-
-
-{{-- Succes notification --}}
-@if (session('succesMessage'))
-    <x-formSucces />
-@endif
-
-
-
-
-

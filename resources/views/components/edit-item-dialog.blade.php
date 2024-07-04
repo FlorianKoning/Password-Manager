@@ -4,7 +4,7 @@
     <div id="dialogBackground" class="fixed inset-0 backdrop-blur-sm bg-background bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
       <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-      <form id="edit-catagorie-form" method="POST" action="#">
+      <form id="edit-catagorie-form" method="POST" action="{{ route('items.update') }}">
           @csrf
 
         <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-6 sm:w-full sm:max-w-md sm:p-6">
@@ -24,7 +24,7 @@
 
 
                     {{-- hidden input for catagorie_id --}}
-                    <input type="hidden" name="catagorie_id" value="">
+                    <input id="item_id" type="hidden" name="item_id" value="">
 
 
                     {{-- title input --}}

@@ -20,10 +20,6 @@
 {{-- Add item dialog --}}
 <x-add-item-dialog :catagories="$catagories" :catagorie="$catagorie" />
 
-{{-- Error notification --}}
-@if ($errors->all() != null)
-    <x-formError :message="$errors->all()" />
-@endif
 
 {{-- Succes notification --}}
 @if (session('succesMessage'))

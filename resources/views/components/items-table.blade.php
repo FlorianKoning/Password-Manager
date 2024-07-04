@@ -72,6 +72,12 @@
       </div>
     </div>
 
+
+{{-- Error notification --}}
+@if ($errors->all() != null)
+  <x-formError :message="$errors->all()" />
+@endif
+
     
 {{-- copy alert --}}
 <x-copy-alert />

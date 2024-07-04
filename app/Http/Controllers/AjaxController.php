@@ -32,7 +32,7 @@ class AjaxController extends BaseController
         $password = Item::getUserPassword($item->id);
 
         return response()->json([
-            'password' => Crypt::decrypt($password->password, false)
+            'password' => Crypt::decrypt($password->password)
         ], 200);
     }
 
@@ -46,7 +46,7 @@ class AjaxController extends BaseController
 
         return response()->json([
             'title' => $item->title,
-            'password' => Crypt::decrypt($item->password, false),
+            'password' => Crypt::decrypt($item->password),
             'type' => $item->type,
             'extra' => $item->extra,
             'is_favorite' => $item->is_favorite

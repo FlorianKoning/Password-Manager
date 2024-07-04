@@ -41,11 +41,13 @@ class Functions {
      */
     public static function generateExtraArray(array $array)
     {
-        $removeArray = ['_token', 'catagorie_id', 'title', 'password', 'type'];
+        $removeArray = ['_token', 'item_id', 'catagorie_id', 'title', 'edit_title', 'password', 'edit_password', 'type', 'edit_type'];
 
         foreach ($removeArray as $key )
         {
-            unset($array[$key]);
+            if(key_exists($key, $array)){
+                unset($array[$key]);
+            }
         }
 
         

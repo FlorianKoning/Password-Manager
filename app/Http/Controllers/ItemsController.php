@@ -14,24 +14,6 @@ use Illuminate\Support\Facades\Crypt;
 class ItemsController extends BaseController
 {
     /**
-     * Displays all the items page
-     */
-    public function index()
-    {
-        $items = DB::table('items')
-            ->select('items.*', 'catagories.title as catagorie')
-            ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
-            ->get();
-
-        return view('items.index', [
-            'catagories' => $this->password_catagories,
-            'items' => $items
-        ]);
-    }
-
-
-
-    /**
      * Stores the new item in de database
      */
     public function store(Request $request, Catagorie $catagorie)
@@ -63,6 +45,40 @@ class ItemsController extends BaseController
     }
 
 
+
+    public function update(Request $request)
+    {
+        // Validates the request data
+        $extra_array = Functions::generateExtraArray($request->all());
+        $this->validation($extra_array, $request);
+
+        // Encrypt all the extra request data in a json file
+        $json_file = $this->encryptJsonFile($extra_array);
+
+
+        // updates all the data
+        DB::table('items')
+            ->where('id','=', $request->item_id)
+            ->update([
+                'title' => $request->edit_title,
+                'type' => $request->edit_type,
+                'password' => Crypt::encrypt($request->edit_password),
+                'extra' => json_encode($json_file)
+            ]);
+
+
+
+        // Returns user to catagorie page
+        if(isset($request->catagorie_id)){
+            return redirect()->route('catagorie.index', $request->catagorie_id)->with('succesMessage', 'true');
+        }
+
+        // Returns users to the dashboard
+        return redirect()->route('dashboard.index')->with('succesMessage', 'true');
+    }
+
+
+
     /**
      * ncrypt all the extra request data in a json file
      */
@@ -80,13 +96,21 @@ class ItemsController extends BaseController
     /**
      * Validates all the request data
      */
-    private function validation(array $extra_array, $request)
+    private function validation(array $extra_array = [], $request)
     {   
         // Validates the default request data
-        $request->validate([
-            'title' => ['required', 'string', 'max:100'],
-            'password' => ['required', 'string', 'max:32'],
-        ]);
+        if(isset($request->title)){
+            $request->validate([
+                'title' => ['required', 'string', 'max:100'],
+                'password' => ['required', 'string', 'max:50'],
+            ]);
+        } else {
+            $request->validate([
+                'edit_title' => ['required', 'string', 'max:100'],
+                'edit_password' => ['required', 'string', 'max:50'],
+            ]);
+        }
+        
 
         // Extra request data validation
         $valid = [];

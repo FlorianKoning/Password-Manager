@@ -62,8 +62,12 @@ function showEditDialog(dialog_id, item_id)
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(data) {
+            console.log(data);
+            $("#item_id").val(item_id);
+
             // Function to fill in the inputs
             displayExtraInputs(dialog_id,data);
+            
         }
     })
 }

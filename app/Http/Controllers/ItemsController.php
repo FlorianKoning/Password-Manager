@@ -19,7 +19,7 @@ class ItemsController extends BaseController
             'edit_title' => 'required|string|max:100',
             'edit_password' => 'required|string|max:50',
         ],
-        'normal' => [
+        'store' => [
             'title' => 'required|string|max:100',
             'password' => 'required|string|max:50',
         ]
@@ -88,6 +88,20 @@ class ItemsController extends BaseController
 
         // Returns users to the dashboard
         return redirect()->route('dashboard.index')->with('succesMessage', 'true');
+    }
+
+
+
+    /**
+     * Deletes the given item
+     */
+    public function delete(Request $request)
+    {
+        $item = Item::find($request->item_id);
+
+        $item->delete();
+
+        return redirect()->back()->with('succesDelete', 'true');
     }
 
 

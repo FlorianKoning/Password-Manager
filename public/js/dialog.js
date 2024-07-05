@@ -9,6 +9,18 @@ function showDialog(dialog_id) {
 }
 
 
+function showDeleteDialog(dialog_id, item_id) {
+    $("#"+dialog_id)
+        .fadeIn()
+        .removeClass("hidden")
+        .attr({
+            'aria-modal': 'true',
+    });
+
+    $("#item_input").val(item_id);
+}
+
+
 // Close function for the dialog div
 function closeDialog(dialog_id) {
     $("#"+dialog_id)

@@ -59,9 +59,9 @@
                         </a>
                       </td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                        <a href="#" class="hover:text-second ease-in-out transition">
+                        <button onclick="showDeleteDialog('warning_dialog', '{{ $item->id }}')" type="submit" class="hover:text-second ease-in-out transition">
                           {{ __('Delete') }}  
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   @endforeach
@@ -71,6 +71,16 @@
         </div>
       </div>
     </div>
+
+
+{{-- delete warning --}}
+<x-deleteWarning />
+
+
+{{-- Delete notification --}}
+@if (session('succesDelete'))
+  <x-deleteSucces />
+@endif
 
 
 {{-- Succes notification --}}

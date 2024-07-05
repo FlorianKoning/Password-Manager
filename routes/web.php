@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/items/categories', [ItemsController::class, 'categories'])->name('items.categories');
     Route::post('/items/store/{catagorie}', [ItemsController::class, 'store'])->name('items.store');
     Route::post('/items/update', [ItemsController::class,'update'])->name('items.update');
+    Route::delete('/items/delete', [ItemsController::class, 'delete'])->name('items.delete');
 
 
     // Profile Routes

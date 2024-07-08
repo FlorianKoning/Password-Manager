@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
-use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Catagories\WifiController;
+use App\Http\Controllers\Items\ItemsController;
+use App\Http\Controllers\Items\ItemSecurityController;
 use App\Http\Controllers\Catagories\CatagorieController;
 
 
@@ -23,6 +23,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/items/store/{catagorie}', [ItemsController::class, 'store'])->name('items.store');
     Route::post('/items/update', [ItemsController::class,'update'])->name('items.update');
     Route::delete('/items/delete', [ItemsController::class, 'delete'])->name('items.delete');
+
+    
+    // Not secure items route
+    Route::get('/items/securety', [ItemSecurityController::class, 'index'])->name('itemsSecurity.index');
 
 
     // Profile Routes

@@ -52,4 +52,13 @@ class Item extends Model
     {
         return DB::table('items')->select('password')->where('user_id', Auth::user()->id)->where('id', $items_id)->first();
     }
+
+
+    public static function getOldItems()
+    {
+        return count(DB::table('items')
+        ->select('*')
+        ->where('updated_at', '<=', now()->subYear())
+        ->get());
+    }
 }

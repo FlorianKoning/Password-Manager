@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Items;
 
+use App\Http\Controllers\BaseController;
 use App\Models\Item;
 use App\Helper\Functions;
 use App\Models\Catagorie;
@@ -42,7 +43,8 @@ class ItemsController extends BaseController
         // Encrypt all the extra request data in a json file
         $json_file = $this->encryptJsonFile($extra_array);
 
-        // Creates the new item in the database
+
+        // Creates the new item in the database 
         Item::create([
             'user_id' => $user->id,
             'title' => $request->title,
@@ -124,12 +126,10 @@ class ItemsController extends BaseController
      */
     private function validation($extra_array, $request, $option)
     {   
-        // Validates the default request data
         if(array_key_exists($option, $this->validation_map)) {
             $request->validate($this->validation_map[$option]);
         }
         
-        // Extra request data validation
         foreach ($extra_array as $key => $value) {
             $extra_array[$key] = "required";
         }

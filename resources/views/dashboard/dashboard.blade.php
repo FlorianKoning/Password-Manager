@@ -1,6 +1,5 @@
 {{-- include javascript files --}}
 <script type="text/javascript" src="{{asset('js/ajax.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/ajax.js') }}"></script>
 
 
 <x-app-layout :catagories="$catagories">
@@ -20,7 +19,7 @@
                 <div class="max-w-full">
                     {{-- table --}}
                     <section>
-                        <x-items-table :items="$items" />
+                        <x-items-table :items="$items"/>
                     </section>
                 </div>
             </div>

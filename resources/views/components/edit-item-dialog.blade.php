@@ -61,6 +61,18 @@
                     </div>
 
 
+                    {{-- toggle favorite --}}
+                    <div>
+                      <!-- Enabled: "bg-second", Not Enabled: "bg-gray-200" -->
+                      <button id="toggle-btn" onclick="toggleBtn()" type="button" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-second focus:ring-offset-2" role="switch" aria-checked="false">
+                        <span class="sr-only">Use setting</span>
+                        <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+                        <span id="toggle-span" aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 translate-x-0 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                      </button>
+                    </div>
+                    
+
+
                     {{-- item type options --}}
                     <div>
                       <label for="edit_type" class="block text-sm font-medium leading-6 text-gray-900">Type of item</label>
@@ -73,7 +85,7 @@
             </div>
 
             <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-              <button type="submit" class="transition ease-in-out delay-50 hover:scale-105 duration-300 inline-flex w-full justify-center rounded-md bg-second text-white px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2">Create</button>
+              <button type="submit" class="transition ease-in-out delay-50 hover:scale-105 duration-300 inline-flex w-full justify-center rounded-md bg-second text-white px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-second sm:col-start-2">Create</button>
               <button onclick="closeDialog('edit_dialog')" type="button" class="transition ease-in-out delay-50 hover:scale-105 duration-300 mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-main shadow-sm ring-1 ring-inset sm:col-start-1 sm:mt-0">Cancel</button>
             </div>
           </div>

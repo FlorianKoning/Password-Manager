@@ -1,3 +1,18 @@
+function toggleBtn() {
+
+    if($("#toggle-btn").attr('aria-checked') == 'false') {
+        $("#toggle-btn").attr('aria-checked', 'true')
+        $("#toggle-btn").removeClass("bg-gray-200").addClass("bg-second");
+        $("#toggle-span").removeClass("translate-x-0").addClass("translate-x-5");
+    } else {
+        $("#toggle-btn").attr('aria-checked', 'false')
+        $("#toggle-btn").removeClass("bg-second").addClass("bg-gray-200");
+        $("#toggle-span").removeClass("translate-x-5").addClass("translate-x-0");
+    }
+
+}
+
+
 // Generates a new password and prints it out in the input
 // Removes hidden class from element with animation
 function generatePassword(input_id) {
@@ -62,7 +77,6 @@ function showEditDialog(dialog_id, item_id)
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(data) {
-            console.log(data);
             $("#item_id").val(item_id);
 
             // Function to fill in the inputs
@@ -132,4 +146,5 @@ function showPassword()
         $("#edit_password").prop('type', 'password')
     }
 }
+
 

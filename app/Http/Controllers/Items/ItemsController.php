@@ -63,6 +63,8 @@ class ItemsController extends BaseController
 
     public function update(Request $request)
     {
+        dd($request);
+
         // Validates the request data
         $extra_array = Functions::generateExtraArray($request->all());
         $this->validation($extra_array, $request, 'edit');

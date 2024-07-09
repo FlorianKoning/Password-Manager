@@ -2,9 +2,11 @@ function toggleBtn() {
     if($("#toggle-btn").attr('aria-checked') == 'false') {
         $("#toggle-btn").attr('aria-checked', 'true').removeClass("bg-gray-200").addClass("bg-second");
         $("#toggle-span").removeClass("translate-x-0").addClass("translate-x-5");
+        $('#toggle-input').val('true')
     } else {
         $("#toggle-btn").attr('aria-checked', 'false').removeClass("bg-second").addClass("bg-gray-200");
         $("#toggle-span").removeClass("translate-x-5").addClass("translate-x-0");
+        $('#toggle-input').val('false')
     }
 }
 
@@ -64,7 +66,7 @@ function showNotification() {
 
 
 // Shows the edit dialog and gets data from route
-function showEditDialog(dialog_id, item_id)
+function showEditDialog(dialog_id, item_id, is_favorite)
 {
     $.ajax({
         type: 'GET',
@@ -74,6 +76,17 @@ function showEditDialog(dialog_id, item_id)
         },
         success: function(data) {
             $("#item_id").val(item_id);
+
+            // Sets the toggle in right position
+            if (is_favorite === '0') {
+                $("#toggle-btn").attr('aria-checked', 'false').removeClass("bg-second").addClass("bg-gray-200");
+                $("#toggle-span").removeClass("translate-x-5").addClass("translate-x-0");
+                $('#toggle-input').val('false')
+            } else {
+                $("#toggle-btn").attr('aria-checked', 'true').removeClass("bg-gray-200").addClass("bg-second");
+                $("#toggle-span").removeClass("translate-x-0").addClass("translate-x-5");
+                $('#toggle-input').val('true')
+            }
 
             // Function to fill in the inputs
             displayExtraInputs(dialog_id,data);

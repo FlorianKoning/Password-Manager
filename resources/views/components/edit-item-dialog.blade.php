@@ -63,10 +63,10 @@
 
                     {{-- toggle favorite --}}
                     <div>
-                      <!-- Enabled: "bg-second", Not Enabled: "bg-gray-200" -->
+                      <x-input-label class="text-main" for="toggle-btn" :value="__('Make this item a favorite')" />
                       <button id="toggle-btn" onclick="toggleBtn()" type="button" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-second focus:ring-offset-2" role="switch" aria-checked="false">
+                        <input type="hidden" name="is_favorite" value="false" id="toggle-input">
                         <span class="sr-only">Use setting</span>
-                        <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
                         <span id="toggle-span" aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 translate-x-0 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
                       </button>
                     </div>

@@ -54,7 +54,7 @@
                         </a>
                       </td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                        <a onclick="showEditDialog('edit_dialog', '{{ $item->id }}')" class="hover:text-second ease-in-out transition cursor-pointer">
+                        <a onclick="showEditDialog('edit_dialog', '{{ $item->id }}', '{{ $item->is_favorite }}')" class="hover:text-second ease-in-out transition cursor-pointer">
                           {{ __('Edit') }}
                         </a>
                       </td>

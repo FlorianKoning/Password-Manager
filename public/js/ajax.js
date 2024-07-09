@@ -1,15 +1,11 @@
 function toggleBtn() {
-
     if($("#toggle-btn").attr('aria-checked') == 'false') {
-        $("#toggle-btn").attr('aria-checked', 'true')
-        $("#toggle-btn").removeClass("bg-gray-200").addClass("bg-second");
+        $("#toggle-btn").attr('aria-checked', 'true').removeClass("bg-gray-200").addClass("bg-second");
         $("#toggle-span").removeClass("translate-x-0").addClass("translate-x-5");
     } else {
-        $("#toggle-btn").attr('aria-checked', 'false')
-        $("#toggle-btn").removeClass("bg-second").addClass("bg-gray-200");
+        $("#toggle-btn").attr('aria-checked', 'false').removeClass("bg-second").addClass("bg-gray-200");
         $("#toggle-span").removeClass("translate-x-5").addClass("translate-x-0");
     }
-
 }
 
 

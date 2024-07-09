@@ -2,11 +2,11 @@ function toggleBtn() {
     if($("#toggle-btn").attr('aria-checked') == 'false') {
         $("#toggle-btn").attr('aria-checked', 'true').removeClass("bg-gray-200").addClass("bg-second");
         $("#toggle-span").removeClass("translate-x-0").addClass("translate-x-5");
-        $('#toggle-input').val('true')
+        $('#toggle-input').val(true)
     } else {
         $("#toggle-btn").attr('aria-checked', 'false').removeClass("bg-second").addClass("bg-gray-200");
         $("#toggle-span").removeClass("translate-x-5").addClass("translate-x-0");
-        $('#toggle-input').val('false')
+        $('#toggle-input').val(false)
     }
 }
 
@@ -81,11 +81,11 @@ function showEditDialog(dialog_id, item_id, is_favorite)
             if (is_favorite === '0') {
                 $("#toggle-btn").attr('aria-checked', 'false').removeClass("bg-second").addClass("bg-gray-200");
                 $("#toggle-span").removeClass("translate-x-5").addClass("translate-x-0");
-                $('#toggle-input').val('false')
+                $('#toggle-input').val(false)
             } else {
                 $("#toggle-btn").attr('aria-checked', 'true').removeClass("bg-gray-200").addClass("bg-second");
                 $("#toggle-span").removeClass("translate-x-0").addClass("translate-x-5");
-                $('#toggle-input').val('true')
+                $('#toggle-input').val(true)
             }
 
             // Function to fill in the inputs

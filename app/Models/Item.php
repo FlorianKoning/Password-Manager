@@ -22,7 +22,8 @@ class Item extends Model
         'categorie_id',
         'type',
         'password',
-        'extra'
+        'extra',
+        'is_favorite'
     ];
 
 

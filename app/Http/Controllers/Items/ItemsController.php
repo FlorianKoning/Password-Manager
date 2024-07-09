@@ -50,7 +50,7 @@ class ItemsController extends BaseController
             'title' => $request->title,
             'categorie_id' => $request->catagorie_id,
             'type' => $request->type,
-            'password' => Crypt::encrypt($request->password),
+            'password' => Crypt::encrypt($request->password, false),
             'extra' => json_encode($json_file)
         ]);
 
@@ -63,8 +63,6 @@ class ItemsController extends BaseController
 
     public function update(Request $request)
     {
-        dd($request);
-
         // Validates the request data
         $extra_array = Functions::generateExtraArray($request->all());
         $this->validation($extra_array, $request, 'edit');
@@ -79,8 +77,9 @@ class ItemsController extends BaseController
             ->update([
                 'title' => $request->edit_title,
                 'type' => $request->edit_type,
-                'password' => Crypt::encrypt($request->edit_password),
-                'extra' => json_encode($json_file)
+                'password' => Crypt::encrypt($request->edit_password, false),
+                'extra' => json_encode($json_file),
+                'is_favorite' => $request->is_favorite ? 1 : 0
             ]);
 
 

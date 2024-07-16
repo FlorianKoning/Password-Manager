@@ -7,11 +7,9 @@ use App\Models\Item;
 use App\Helper\Functions;
 use App\Models\Catagorie;
 use Illuminate\Http\Request;
-use App\Helper\AuthenticationKey;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Validation\ValidationException;
 
 class ItemsController extends BaseController
 {
@@ -25,6 +23,21 @@ class ItemsController extends BaseController
             'password' => 'required|string|max:50',
         ]
     ];
+
+
+    /**
+     * Shows all the favorite items of the user
+     * @param Request $request
+     */
+    public function favorites(Request $request)
+    {   
+        $items = Item::getAllFavorite();
+
+        return view('items.favorites', [
+            'catagories' => $this->password_catagories,
+            'items' => $items
+        ]);
+    }
 
 
     /**
@@ -106,7 +119,6 @@ class ItemsController extends BaseController
 
         return redirect()->back()->with('succesDelete', 'true');
     }
-
 
 
     /**

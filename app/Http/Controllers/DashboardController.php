@@ -32,7 +32,7 @@ class DashboardController extends BaseController
         ]);
     }
 
-
+    
     /**
      * Return the percentage of password that have not been updated for/since one year 
      */
@@ -41,7 +41,9 @@ class DashboardController extends BaseController
         $total_items = Item::itemsCount();
         $old_items = Item::getOldItems();
 
-        if ($total_items == 0) return 0;
+        if ($total_items == 0) {
+            return 0; 
+        } 
 
         return ($old_items / $total_items) * 100;
     }

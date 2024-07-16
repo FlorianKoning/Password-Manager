@@ -8,7 +8,6 @@ use App\Http\Controllers\Items\ItemsController;
 use App\Http\Controllers\Items\ItemSecurityController;
 use App\Http\Controllers\Catagories\CatagorieController;
 
-
 Route::get('/', function () {
     return redirect(route('dashboard.index'));
 })->name('dashboard');
@@ -20,11 +19,12 @@ Route::middleware('auth')->group(function () {
 
     // All items routes
     Route::get('/items/categories', [ItemsController::class, 'categories'])->name('items.categories');
+    Route::get('/items/favorites', [ItemsController::class, 'favorites'])->name('items.favorites');
     Route::post('/items/store/{catagorie}', [ItemsController::class, 'store'])->name('items.store');
     Route::post('/items/update', [ItemsController::class,'update'])->name('items.update');
     Route::delete('/items/delete', [ItemsController::class, 'delete'])->name('items.delete');
 
-    
+
     // Not secure items route
     Route::get('/items/securety', [ItemSecurityController::class, 'index'])->name('itemsSecurity.index');
 

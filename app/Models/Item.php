@@ -62,4 +62,18 @@ class Item extends Model
         ->where('updated_at', '<=', now()->subYear())
         ->get());
     }
+
+
+    /**
+     * Gets all the favorite items of the user
+     */
+    public static function getAllFavorite()
+    {
+        return DB::table('items')
+            ->select('*', 'catagories.title as catagorie')
+            ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
+            ->where('items.user_id', Auth::user()->id)
+            ->where('items.is_favorite', 1)
+            ->get();
+    }
 }

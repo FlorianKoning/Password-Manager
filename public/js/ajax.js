@@ -21,8 +21,6 @@ function generatePassword(input_id) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success:function(data) {
-            console.log(data.password);
-
             $("#"+input_id).val(data.password);
 
             $("svg").removeClass("hidden");
@@ -96,6 +94,36 @@ function showEditDialog(dialog_id, item_id, is_favorite)
 }
 
 
+function showSelectedCatagorieDialog(path) {
+    const CATAGORIE = $("#select-catagorie").find(":selected").val();
+    path = path.substring(0, path.length -3) + CATAGORIE;  
+
+
+    // Saves the path to the route location and saves path to form action
+    $("#catagorie-form-create").attr('action', path);
+    $("#catagorie_id").attr('value', CATAGORIE);
+
+
+    // hides the catagorie_form_dialog
+    $("#catagorie_form_dialog")
+        .fadeOut()
+        .addClass("hidden")
+        .attr({
+            'aria-modal': 'false',
+    });
+
+    $("#edit_password").prop('type', 'password')
+    $("#extra_div").remove();
+
+
+    // Displays the add item dialog
+    $("#catagorie_dialog")
+        .fadeIn()
+        .removeClass("hidden")
+        .attr({
+            'aria-modal': 'true',
+    });
+}
 
 
 function displayExtraInputs(dialog_id,data) 

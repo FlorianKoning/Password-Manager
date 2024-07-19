@@ -15,7 +15,3 @@
         </div>
     </div>
 </x-app-layout>
-
-
-{{-- Add item dialog --}}
-<x-add-item-dialog :catagories="$catagories" :catagorie="$catagorie" />

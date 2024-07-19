@@ -1,4 +1,4 @@
-@props(['items', 'catagorie', 'catagories'])
+@props(['items', 'catagorie'])
 
 <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
@@ -7,7 +7,7 @@
         <p class="mt-2 text-sm text-gray-700">A list of all the {{ isset($catagorie['title']) ? $catagorie['title'] : "item" }} passwords/accounts in your account including their title, catagorie, type.</p>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <button onclick="showDialog('catagorie_form_dialog')" type="button" class="rounded-md bg-second px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-main focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-second ease-in-out transition duration-300">Add item</button>
+        <button onclick="showDialog('catagorie_dialog')" type="button" class="rounded-md bg-second px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-main focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-second ease-in-out transition duration-300">Add item</button>
       </div>
     </div>
     <div class="mt-8 flow-root">
@@ -100,11 +100,7 @@
 
 
 {{-- Add item dialog --}}
-<x-add-item-dialog :catagories="$catagories" />
-
-{{-- get-catagorie-form --}}
-<x-catagorie-form :catagories="$catagories" />
-
+<x-add-item-dialog :catagorie="$catagorie" />
   
 {{-- Edit dialogs --}}
 <x-edit-item-dialog />

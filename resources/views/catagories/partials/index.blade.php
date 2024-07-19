@@ -1,5 +1,5 @@
 <section>
     {{-- items table --}}
-    <x-items-table  :items="$items" :catagorie="$catagorie" />
+    <x-catagories-items-table :items="$items" :catagorie="$catagorie" />
 
 </section>

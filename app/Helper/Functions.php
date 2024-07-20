@@ -3,6 +3,7 @@
 namespace App\Helper;
 
 use stdClass;
+use App\Models\Item;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
@@ -69,5 +70,21 @@ class Functions {
         }
 
         return $new_extra_array;
+    }
+
+
+     /**
+     * Return the percentage of password that have not been updated for/since one year 
+     */
+    public static function itemSafety()
+    {
+        $total_items = Item::itemsCount();
+        $old_items = Item::getOldItems();
+
+        if ($total_items == 0) {
+            return 0; 
+        } 
+
+        return ($old_items / $total_items) * 100;
     }
 }

@@ -60,6 +60,7 @@ class Item extends Model
         return count(DB::table('items')
         ->select('*')
         ->where('updated_at', '<=', now()->subYear())
+        ->where('items.user_id', Auth::user()->id)
         ->get());
     }
 
@@ -74,6 +75,21 @@ class Item extends Model
             ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
             ->where('items.user_id', Auth::user()->id)
             ->where('items.is_favorite', 1)
+            ->get();
+    }
+
+
+
+    /**
+     * Gets all the not secure items from the user
+     */
+    public static function getNotSecureItems()
+    {
+        return DB::table('items')
+            ->select('items.*', 'catagories.title as catagorie')
+            ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
+            ->where('updated_at', '<=', now()->subYear())
+            ->where('items.user_id', Auth::user()->id)
             ->get();
     }
 }

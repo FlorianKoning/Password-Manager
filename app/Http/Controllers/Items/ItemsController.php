@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Models\Item;
 use App\Helper\Functions;
 use App\Models\Catagorie;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -83,7 +84,6 @@ class ItemsController extends BaseController
         // Encrypt all the extra request data in a json file
         $json_file = $this->encryptJsonFile($extra_array);
 
-
         // updates all the data
         DB::table('items')
             ->where('id','=', $request->item_id)
@@ -92,8 +92,11 @@ class ItemsController extends BaseController
                 'type' => $request->edit_type,
                 'password' => Crypt::encrypt($request->edit_password, false),
                 'extra' => json_encode($json_file),
-                'is_favorite' => $request->is_favorite ? 1 : 0
+                'is_favorite' => $request->is_favorite ? 1 : 0,
+                'updated_at' => date('Y-m-d G:i:s') 
             ]);
+
+        
 
 
 

@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 
 
     // Not secure items route
-    Route::get('/items/securety', [ItemSecurityController::class, 'index'])->name('itemsSecurity.index');
+    Route::get('/items/security', [ItemSecurityController::class, 'index'])->name('dashboard.security');
 
 
     // Profile Routes

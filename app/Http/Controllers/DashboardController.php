@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Functions;
 use App\Models\Catagorie;
 use App\Models\Item;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BaseController;
 
 class DashboardController extends BaseController
@@ -19,7 +19,7 @@ class DashboardController extends BaseController
         $catagoie_count = Catagorie::categoriesCount();
         $items_count = Item::itemsCount();
         $favorite_count = Item::favoriteCount();
-        $item_safety = $this->itemSafety();
+        $item_safety = Functions::itemSafety();
 
 
         return view('dashboard.dashboard', [
@@ -33,18 +33,5 @@ class DashboardController extends BaseController
     }
 
     
-    /**
-     * Return the percentage of password that have not been updated for/since one year 
-     */
-    private function itemSafety()
-    {
-        $total_items = Item::itemsCount();
-        $old_items = Item::getOldItems();
-
-        if ($total_items == 0) {
-            return 0; 
-        } 
-
-        return ($old_items / $total_items) * 100;
-    }
+   
 }

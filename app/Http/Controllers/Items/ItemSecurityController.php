@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Items;
+use App\Models\Item;
+use App\Helper\Functions;
 use App\Http\Controllers\BaseController;
 
 
@@ -13,6 +15,8 @@ class ItemSecurityController extends BaseController
     {
         return view('itemSecurity.index', [
             'catagories' => $this->password_catagories,
+            'item_safety' => Functions::itemSafety(),
+            'items' => Item::getNotSecureItems(),
         ]);
     }
 }

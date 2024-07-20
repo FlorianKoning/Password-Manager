@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Items;
 
-use App\Http\Controllers\BaseController;
+use Carbon\Carbon;
 use App\Models\Item;
+use App\Models\User;
 use App\Helper\Functions;
 use App\Models\Catagorie;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use App\Http\Controllers\BaseController;
 
 class ItemsController extends BaseController
 {
@@ -36,6 +37,7 @@ class ItemsController extends BaseController
 
         return view('items.favorites', [
             'catagories' => $this->password_catagories,
+            'profile_picture' => $this->profile_picture,
             'items' => $items
         ]);
     }
@@ -95,9 +97,6 @@ class ItemsController extends BaseController
                 'is_favorite' => $request->is_favorite ? 1 : 0,
                 'updated_at' => date('Y-m-d G:i:s') 
             ]);
-
-        
-
 
 
         // Returns user to catagorie page

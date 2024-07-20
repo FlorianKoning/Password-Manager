@@ -52,6 +52,22 @@ return [
             'throw' => false,
         ],
 
+        'user_image' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/users/user_image'),
+            'url' => env('APP_URL').'/storage/users/user_image',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'default_image' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/users/default_img'),
+            'url' => env('APP_URL').'/storage/users/default_img',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

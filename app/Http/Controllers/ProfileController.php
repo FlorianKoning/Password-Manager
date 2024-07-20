@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Functions;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class ProfileController extends BaseController
             'user' => $request->user(),
             'key' => AuthenticationKey::getKey(),
             'catagories' => $this->password_catagories,
+            'profile_picture' => $this->profile_picture,
         ]);
     }
 
@@ -35,6 +37,8 @@ class ProfileController extends BaseController
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
+
+        Functions::uploadProfilePhoto($request->file('file-upload'));
 
         $request->user()->save();
 

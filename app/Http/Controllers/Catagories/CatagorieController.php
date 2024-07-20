@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Catagories;
 
-use App\Http\Requests\StoreCatagorieRequest;
+use App\Models\User;
 use App\Models\Catagorie;
-use Illuminate\Routing\RedirectController;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController;
+use Illuminate\Routing\RedirectController;
+use App\Http\Requests\StoreCatagorieRequest;
 
 class CatagorieController extends BaseController
 {
@@ -29,6 +30,7 @@ class CatagorieController extends BaseController
 
         return view('catagories.index', [
             'catagories'  => $this->password_catagories,
+            'profile_picture' => $this->profile_picture,
             'catagorie' => $catagorie,
             'items' => $items,
         ]);

@@ -1,4 +1,4 @@
-@props(['catagories'])
+@props(['catagories', 'profile_picture'])
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-background text-white">
@@ -16,7 +16,7 @@
 
         // Fonts
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet">
 
         // scripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])

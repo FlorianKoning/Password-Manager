@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\User;
 use App\Helper\Functions;
 use App\Models\Catagorie;
-use App\Models\Item;
 use App\Http\Controllers\BaseController;
 
 class DashboardController extends BaseController
@@ -24,11 +25,12 @@ class DashboardController extends BaseController
 
         return view('dashboard.dashboard', [
             'catagories' => $this->password_catagories,
+            'profile_picture' => $this->profile_picture,
             'items' => $items,
             'catagoie_count' => $catagoie_count,
             'items_count' => $items_count,
             'favorite_count' => $favorite_count,
-            'item_safety' => $item_safety
+            'item_safety' => $item_safety,
         ]);
     }
 

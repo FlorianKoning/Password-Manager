@@ -6,6 +6,7 @@ use stdClass;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
@@ -86,5 +87,36 @@ class Functions {
         } 
 
         return ($old_items / $total_items) * 100;
+    }
+
+
+    /**
+     * uploads the uploaded image to user
+     * @param  $file
+     */
+    public static function uploadProfilePhoto($file = null)
+    {
+        if ($file === null) {
+            return false;
+        }
+
+        // Uploads the file to the storage and gets the url
+        Storage::disk('user_image')->putFileAs($file, Auth::user()->email.".jpg");
+        $file_url = Storage::disk('user_image')->url(Auth::user()->email.".jpg");
+
+        // Updates the user
+        User::where('id', Auth::user()->id)
+            ->update([
+                'user_img' => $file_url
+        ]);
+    }
+
+
+    /**
+     * Gets the default img url
+     */
+    public static function getDefaultImage()
+    {
+        return Storage::disk("default_image")->url('default_user.jpg');
     }
 }

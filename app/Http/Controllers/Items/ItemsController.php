@@ -44,6 +44,24 @@ class ItemsController extends BaseController
 
 
     /**
+     * 
+     */
+    public function search(Request $request)
+    {
+        return view('dashboard.dashboard', [
+            'catagories' => $this->password_catagories,
+            'profile_picture' => $this->profile_picture,
+            'items' => Item::searchQuery($request->search),
+            'catagoie_count' => Catagorie::categoriesCount(),
+            'items_count' => Item::itemsCount(),
+            'favorite_count' => Item::favoriteCount(),
+            'item_safety' => Functions::itemSafety(),
+        ]);
+    }
+
+
+
+    /**
      * Stores the new item in de database
      */
     public function store(Request $request, Catagorie $catagorie)

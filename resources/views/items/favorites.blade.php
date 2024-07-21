@@ -10,7 +10,7 @@
                 <div class="max-w-full">
                     {{-- table --}}
                     <section>
-                        <x-items-table :catagories="$catagories" :items="$items"/>
+                        <x-favorites-table :catagories="$catagories" :items="$items"/>
                     </section>
                 </div>
             </div>

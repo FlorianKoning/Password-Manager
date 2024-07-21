@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NoteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ProfileController;
@@ -15,6 +16,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::post('/search', [ItemsController::class, 'search'])->name('dashboard.search');
 
 
     // All items routes
@@ -39,6 +41,10 @@ Route::middleware('auth')->group(function () {
     // All catagorie routes
     Route::get('/items/{catagorie}', [CatagorieController::class, 'index'])->name('catagorie.index');
     Route::post('/catagorie/add', [CatagorieController::class, 'store'])->name('catagorie.store');
+
+    
+    // All notes routes
+    Route::resource('/notes', NoteController::class);
 
 
     // Ajax routes

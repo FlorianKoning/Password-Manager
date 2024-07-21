@@ -71,7 +71,7 @@ class Item extends Model
     public static function getAllFavorite()
     {
         return DB::table('items')
-            ->select('*', 'catagories.title as catagorie')
+            ->select('items.*', 'catagories.title as catagorie')
             ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
             ->where('items.user_id', Auth::user()->id)
             ->where('items.is_favorite', 1)
@@ -89,6 +89,18 @@ class Item extends Model
             ->select('items.*', 'catagories.title as catagorie')
             ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
             ->where('updated_at', '<=', now()->subYear())
+            ->where('items.user_id', Auth::user()->id)
+            ->get();
+    }
+
+
+
+    public static function searchQuery(string $search)
+    {
+        return DB::table('items')
+            ->select('items.*', 'catagories.title as catagorie')
+            ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
+            ->where('items.title', 'LIKE', "%$search%")
             ->where('items.user_id', Auth::user()->id)
             ->get();
     }

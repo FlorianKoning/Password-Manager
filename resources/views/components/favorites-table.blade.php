@@ -70,7 +70,13 @@
           </div>
         </div>
       </div>
+      {{-- favorites pagination --}}
+      <div>
+        {{ $items->links() }}
+      </div>
+
     </div>
+
 
 
 {{-- Delete notification --}}

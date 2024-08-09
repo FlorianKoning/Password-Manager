@@ -25,7 +25,7 @@ class CatagorieController extends BaseController
             ->leftJoin('catagories', 'categorie_id', '=', 'catagories.id')
             ->where('categorie_id', $catagorie['id'])
             ->where('catagories.user_id', Auth::user()->id)
-            ->get();
+            ->paginate(7);
             
 
         return view('catagories.index', [

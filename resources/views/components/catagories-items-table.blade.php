@@ -70,6 +70,10 @@
           </div>
         </div>
       </div>
+      {{-- pagination --}}
+      <div class="mt-5">
+        {{ $items->links() }}
+      </div>
     </div>
 
 

@@ -11,7 +11,7 @@
       <div class="h-6 w-px bg-border lg:hidden" aria-hidden="true"></div>
 
       <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-        <form class="relative flex flex-1" action="{{ route('dashboard.search') }}" method="POST">
+        <form class="relative my-auto flex flex-1" action="{{ route('dashboard.search') }}" method="POST">
           @csrf
 
           <label for="search-field" class="sr-only">Search</label>

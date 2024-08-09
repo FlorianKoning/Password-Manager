@@ -33,7 +33,7 @@ class Item extends Model
         return DB::table('items')
             ->select('items.*', 'catagories.title as catagorie')
             ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
-            ->get();
+            ->paginate(7);
     }
 
 
@@ -75,7 +75,7 @@ class Item extends Model
             ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
             ->where('items.user_id', Auth::user()->id)
             ->where('items.is_favorite', 1)
-            ->get();
+            ->paginate(7);
     }
 
 
@@ -102,6 +102,6 @@ class Item extends Model
             ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
             ->where('items.title', 'LIKE', "%$search%")
             ->where('items.user_id', Auth::user()->id)
-            ->get();
+            ->paginate(7);
     }
 }

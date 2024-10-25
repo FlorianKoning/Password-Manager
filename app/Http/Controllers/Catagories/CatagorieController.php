@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Catagories;
 
-use App\Models\User;
 use App\Models\Catagorie;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController;
-use Illuminate\Routing\RedirectController;
 use App\Http\Requests\StoreCatagorieRequest;
 
 class CatagorieController extends BaseController
@@ -26,6 +24,8 @@ class CatagorieController extends BaseController
             ->where('categorie_id', $catagorie['id'])
             ->where('catagories.user_id', Auth::user()->id)
             ->paginate(7);
+
+        // dd($items);
             
 
         return view('catagories.index', [

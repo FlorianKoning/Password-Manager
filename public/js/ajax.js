@@ -45,7 +45,7 @@ function getPassword(item_id) {
         success: function(data) {
             showNotification();
 
-            console.log(data.password);
+            // console.log(data.password);
             navigator.clipboard.writeText(data.password);
         }
     })
@@ -145,6 +145,8 @@ function displayExtraInputs(dialog_id,data)
 
     
     container.appendChild(div);
+
+    // console.log(data.extra);
 
 
     if(data.extra != '[]') {

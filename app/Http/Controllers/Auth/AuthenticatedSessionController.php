@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Session;
 use App\Models\User;
 use App\Helper\Functions;
 use Illuminate\View\View;

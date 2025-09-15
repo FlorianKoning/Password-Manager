@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Catagorie extends Model
+class Category extends Model
 {
     use HasFactory;
 
@@ -27,9 +27,8 @@ class Catagorie extends Model
     public $timestamps = false;
 
 
-
     public static function categoriesCount()
     {
-        return DB::table('catagories')->where('user_id', Auth::user()->id)->count();
+        return DB::table('categories')->where('user_id', Auth::user()->id)->count();
     }
 }

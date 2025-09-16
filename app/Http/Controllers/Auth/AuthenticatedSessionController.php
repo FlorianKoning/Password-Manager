@@ -49,25 +49,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // Validates the login request data
-        $validated = $request->validated();
+        $credentials = $request->only('email', 'password');
 
-    
-        // Gets user by email
-        $user =  User::where('email', '=', $validated['email'])->first();
+        if (!Auth::attempt($credentials)) {
+            return redirect()->route('login')->withErrors(['error' => 'Invalid credentials']);
+        }
 
-        // Gets the master password by user id
-        $master_password = Functions::getMasterPassword($user->id);
-
-
-        // Checks if the password is the same as the master password
-        if(Hash::check($validated['password'], $master_password)) {
-            $request->session()->put('credentials', true);
-
-            return redirect()->route('key', $user);
-        } 
-
-        return redirect()->route('login')->withErrors(['email' => 'Credentials do not match']);
+        return redirect()->route('dashboard.index')->withErrors(['login' => 'You are logged in!']);
     }
 
     /**
@@ -80,7 +68,7 @@ class AuthenticatedSessionController extends Controller
         ]);
 
         $user_key = AuthenticationKey::getKeyById($user->id);
-        
+
         if(Crypt::decrypt($user_key, false) === $request->key) {
             $request->session()->flush();
 

@@ -3,8 +3,8 @@
 <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold leading-6 text-gray-900">{{ isset($catagorie['title']) ? $catagorie['title'] : 'All Items' }}</h1>
-        <p class="mt-2 text-sm text-gray-700">A list of all the {{ isset($catagorie['title']) ? $catagorie['title'] : "item" }} passwords/accounts in your account including their title, catagorie, type.</p>
+        <h1 class="text-base font-semibold leading-6">{{ isset($catagorie['title']) ? $catagorie['title'] : 'All Items' }}</h1>
+        <p class="mt-2 text-sm">A list of all the {{ isset($catagorie['title']) ? $catagorie['title'] : "item" }} passwords/accounts in your account including their title, catagorie, type.</p>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
         <button onclick="showDialog('catagorie_form_dialog')" type="button" class="rounded-md bg-second px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-main focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-second ease-in-out transition duration-300">Add item</button>
@@ -44,23 +44,23 @@
                   {{-- content --}}
                   @foreach ($items as $item)
                     <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $item->title }}</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $item->catagorie }}</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $item->type }}</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $item->created_at }}</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">{{ $item->title }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm">{{ $item->catagorie }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm">{{ $item->type }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm">{{ $item->created_at }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm">
                         <a id="copyButton" onclick="getPassword('{{ $item->id }}')" class="hover:text-second ease-in-out transition cursor-pointer">
                           {{ __('Copy') }}
                         </a>
                       </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                      <td class="whitespace-nowrap px-3 py-4 text-sm">
                         <a onclick="showEditDialog('edit_dialog', '{{ $item->id }}', '{{ $item->is_favorite }}')" class="hover:text-second ease-in-out transition cursor-pointer">
                           {{ __('Edit') }}
                         </a>
                       </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                      <td class="whitespace-nowrap px-3 py-4 text-sm">
                         <button onclick="showDeleteDialog('warning_dialog', '{{ $item->id }}')" type="submit" class="hover:text-second ease-in-out transition">
-                          {{ __('Delete') }}  
+                          {{ __('Delete') }}
                         </button>
                       </td>
                     </tr>
@@ -109,6 +109,6 @@
 {{-- get-catagorie-form --}}
 <x-catagorie-form :catagories="$catagories" />
 
-  
+
 {{-- Edit dialogs --}}
 <x-edit-item-dialog />

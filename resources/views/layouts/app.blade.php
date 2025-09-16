@@ -1,7 +1,7 @@
 @props(['catagories', 'profile_picture'])
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-background text-white">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,13 @@
         
         {{-- jquery --}}
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<<<<<<< HEAD
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         
+=======
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+
+>>>>>>> 3b29f3324f50ec7aa0c45a3115efaa4826b0a1ce
 
         {{-- Fonts --}}
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -23,7 +28,7 @@
         {{-- scripts --}}
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="h-full font-sans antialiased">
+    <body class="h-full font-sans antialiased bg-appBackground text-textColor">
         <div>
             <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
                 @include('layouts.navigation')
@@ -32,7 +37,6 @@
                 
                 <main class="py-10">
                     <div class="px-4 sm:px-6 lg:px-8">
-                        <!-- Your content -->
                         {{ $slot }}
                     </div>
                 </main>

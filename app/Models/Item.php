@@ -11,7 +11,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    /**
+      /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -19,7 +19,7 @@ class Item extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'categorie_id',
+        'category_id',
         'type',
         'password',
         'extra',
@@ -31,8 +31,8 @@ class Item extends Model
     public static function tableItems()
     {
         return DB::table('items')
-            ->select('items.*', 'catagories.title as catagorie')
-            ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
+            ->select('items.*', 'categories.title as catagorie')
+            ->leftJoin('categories', 'items.category_id', '=', 'categories.id')
             ->paginate(7);
     }
 
@@ -71,8 +71,8 @@ class Item extends Model
     public static function getAllFavorite()
     {
         return DB::table('items')
-            ->select('items.*', 'catagories.title as catagorie')
-            ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
+            ->select('items.*', 'categories.title as catagorie')
+            ->leftJoin('categories', 'items.category_id', '=', 'categories.id')
             ->where('items.user_id', Auth::user()->id)
             ->where('items.is_favorite', 1)
             ->paginate(7);
@@ -86,8 +86,8 @@ class Item extends Model
     public static function getNotSecureItems()
     {
         return DB::table('items')
-            ->select('items.*', 'catagories.title as catagorie')
-            ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
+            ->select('items.*', 'categories.title as catagorie')
+            ->leftJoin('categories', 'items.category_id', '=', 'categories.id')
             ->where('updated_at', '<=', now()->subYear())
             ->where('items.user_id', Auth::user()->id)
             ->get();
@@ -98,8 +98,8 @@ class Item extends Model
     public static function searchQuery(string $search)
     {
         return DB::table('items')
-            ->select('items.*', 'catagories.title as catagorie')
-            ->leftJoin('catagories', 'items.categorie_id', '=', 'catagories.id')
+            ->select('items.*', 'categories.title as catagorie')
+            ->leftJoin('categories', 'items.category_id', '=', 'categories.id')
             ->where('items.title', 'LIKE', "%$search%")
             ->where('items.user_id', Auth::user()->id)
             ->paginate(7);

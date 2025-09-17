@@ -27,7 +27,7 @@
           </div>
           <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
             <div>
-                <form method="POST" action="{{ route('items.delete') }}">
+                <form method="POST" action="">
                     @csrf
                     @method('delete')
 

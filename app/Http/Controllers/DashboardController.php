@@ -17,8 +17,6 @@ class DashboardController extends BaseController
         $items = Item::tableItems();
 
         return view('dashboard.dashboard', [
-            'catagories' => $this->password_catagories,
-            'profile_picture' => $this->profile_picture,
             'items' => $items,
             'catagoie_count' => Category::categoriesCount(),
             'items_count' => Item::itemsCount(),

@@ -1,0 +1,10 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Interface\GlobalInterface;
+
+class {{ class }} extends GlobalInterface
+{
+
+}

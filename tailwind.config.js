@@ -22,12 +22,15 @@ export default {
             colors: {
                 'appBackground': '#181C1F',
                 'containerBackground': '#212529',
+                'containerGradient': '#252B30',
                 'textColor': '#D6DCD8',
                 'main': '#262D3D',
                 'second-main': '#2D3446',
                 'background': '#CDD1DD',
                 'second': '#349762',
-                'border': '#323846'
+                'secondGradient': '#2D8555',
+                'border': '#323846',
+                'hover': '#2F353A'
             },
             keyframes: {
                 slideIn: {

@@ -45,10 +45,12 @@ return [
 
     "permissions" => [
         "roles" => [
-            
+            "admin" => [
+                "UserController" => ["*"],
+            ],
         ],
         "global" => [
-            
+            "DashboardController" => ["*"],
         ]
     ]
 ];

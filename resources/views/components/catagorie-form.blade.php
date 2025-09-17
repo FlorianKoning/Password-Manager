@@ -4,7 +4,7 @@
     <div id="dialogBackground" class="fixed inset-0 backdrop-blur-sm bg-background bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
       <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-      <form id="get-catagorie-form" method="POST" action="{{ route('items.update') }}">
+      <form id="get-catagorie-form" method="POST" action="">
           @csrf
 
         <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-6 sm:w-full sm:max-w-md sm:p-6">
@@ -36,7 +36,7 @@
             </div>
 
             <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-              <button onclick="showSelectedCatagorieDialog('{{ route('items.store', 'foo') }}')" type="button" class="transition ease-in-out delay-50 hover:scale-105 duration-300 inline-flex w-full justify-center rounded-md bg-second text-white px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-second sm:col-start-2">Create</button>
+              <button type="button" class="transition ease-in-out delay-50 hover:scale-105 duration-300 inline-flex w-full justify-center rounded-md bg-second text-white px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-second sm:col-start-2">Create</button>
               <button onclick="closeDialog('catagorie_form_dialog')" type="button" class="transition ease-in-out delay-50 hover:scale-105 duration-300 mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-main shadow-sm ring-1 ring-inset sm:col-start-1 sm:mt-0">Cancel</button>
             </div>
           </div>

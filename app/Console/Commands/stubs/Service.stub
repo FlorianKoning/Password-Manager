@@ -1,0 +1,17 @@
+<?php
+
+namespace {{namespace}};
+
+class {{class}}
+{
+    public function __construct()
+    {
+        // Constructor logic here
+    }
+
+    public function exampleMethod()
+    {
+        // Example method logic
+        return 'Service method called!';
+    }
+}

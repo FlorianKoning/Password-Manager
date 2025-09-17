@@ -1,5 +1,3 @@
-@props(['catagories', 'profile_picture'])
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
     <head>
@@ -26,6 +24,8 @@
             <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
                 @include('layouts.navigation')
                 @include('layouts.banner')
+
+                <x-auth.redirect-error />
 
                 <main class="py-10">
                     <div class="px-4 sm:px-6 lg:px-8">

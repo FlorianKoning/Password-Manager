@@ -32,6 +32,6 @@ class AclMiddleware
         }
 
 
-        return redirect()->route('dashboard')->with('redirectResponse', 'You do not have permission for this action!');
+        return redirect()->route('dashboard.index')->with('redirectResponse', 'You do not have permission for this action!');
     }
 }

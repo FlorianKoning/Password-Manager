@@ -9,7 +9,7 @@ use App\Interface\Auth\AclServiceInterface;
 
 class AclService implements AclServiceInterface
 {
-protected string $userRole;
+    protected string $userRole;
     protected string $fileName;
     protected string $functionName;
     protected array $rolePermissionsJson;
